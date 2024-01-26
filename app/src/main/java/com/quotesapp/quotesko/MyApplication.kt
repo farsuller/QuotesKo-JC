@@ -9,7 +9,7 @@ import com.quotesapp.quotesko.utils.Constants.QUOTES_CHANNEL_ID
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class MyApplication : Application(){
+class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -17,11 +17,11 @@ class MyApplication : Application(){
     }
 
     private fun createNotificationChannel() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 QUOTES_CHANNEL_ID,
                 "Quotes",
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_DEFAULT,
             )
             channel.description = "Used for quotes notifications"
 

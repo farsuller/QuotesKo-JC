@@ -3,9 +3,7 @@ package com.quotesapp.quotesko.service
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
-
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
@@ -14,17 +12,17 @@ import com.quotesapp.quotesko.R
 import com.quotesapp.quotesko.utils.Constants.QUOTES_CHANNEL_ID
 
 class QuotesNotificationService(
-    private val context: Context
+    private val context: Context,
 ) {
     private val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    fun showNotification(quote: String, author:String) {
+    fun showNotification(quote: String, author: String) {
         val activityIntent = Intent(context, MainActivity::class.java)
         val activityPendingIntent = PendingIntent.getActivity(
             context,
             1,
             activityIntent,
-            PendingIntent.FLAG_IMMUTABLE
+            PendingIntent.FLAG_IMMUTABLE,
         )
 
         val notification = NotificationCompat.Builder(context, QUOTES_CHANNEL_ID)
@@ -37,9 +35,8 @@ class QuotesNotificationService(
         notificationManager.notify(1, notification)
     }
 
-    fun showExpandableNotification(quote: String, author:String) {
+    fun showExpandableNotification(quote: String, author: String) {
         val image = context.bitmapFromResource(R.drawable.quotesko)
-
 
         val notification = NotificationCompat.Builder(context, QUOTES_CHANNEL_ID)
             .setContentTitle(quote)
@@ -51,17 +48,17 @@ class QuotesNotificationService(
                 NotificationCompat
                     .BigPictureStyle()
                     .bigPicture(image)
-                    .bigLargeIcon(image)
+                    .bigLargeIcon(image),
             )
             .setAutoCancel(true)
             .build()
 
         notificationManager.notify(
             2,
-            notification
+            notification,
         )
     }
-    fun showExpandableLongText(quote: String, author:String) {
+    fun showExpandableLongText(quote: String, author: String) {
         val notification = NotificationCompat.Builder(context, QUOTES_CHANNEL_ID)
             .setContentTitle(quote)
             .setContentText(author)
@@ -70,18 +67,18 @@ class QuotesNotificationService(
             .setStyle(
                 NotificationCompat
                     .BigTextStyle()
-                    .bigText("Very big text")
+                    .bigText("Very big text"),
             )
             .setAutoCancel(true)
             .build()
 
         notificationManager.notify(
             1,
-            notification
+            notification,
         )
     }
 
-    fun showInboxStyleNotification(quote: String, author:String) {
+    fun showInboxStyleNotification(quote: String, author: String) {
         val notification = NotificationCompat.Builder(context, QUOTES_CHANNEL_ID)
             .setContentTitle(quote)
             .setContentText(author)
@@ -96,18 +93,18 @@ class QuotesNotificationService(
                     .addLine("Line 4")
                     .addLine("Line 5")
                     .addLine("Line 6")
-                    .addLine("Line 7")
+                    .addLine("Line 7"),
             )
             .setAutoCancel(true)
             .build()
 
         notificationManager.notify(
             1,
-            notification
+            notification,
         )
     }
 
-    fun showNotificationGroup(quote: String, author:String) {
+    fun showNotificationGroup(quote: String, author: String) {
         val groupId = "quotes_group"
         val summaryId = 0
 
@@ -119,7 +116,7 @@ class QuotesNotificationService(
             .setStyle(
                 NotificationCompat
                     .InboxStyle()
-                    .addLine("Line 1")
+                    .addLine("Line 1"),
             )
             .setAutoCancel(true)
             .setGroup(groupId)
@@ -134,7 +131,7 @@ class QuotesNotificationService(
                 NotificationCompat
                     .InboxStyle()
                     .addLine("Line 1")
-                    .addLine("Line 2")
+                    .addLine("Line 2"),
             )
             .setAutoCancel(true)
             .setGroup(groupId)
@@ -149,7 +146,7 @@ class QuotesNotificationService(
                 NotificationCompat
                     .InboxStyle()
                     .setSummaryText("Quotes reminders missed")
-                    .setBigContentTitle("Quotes Reminders")
+                    .setBigContentTitle("Quotes Reminders"),
             )
             .setAutoCancel(true)
             .setGroup(groupId)
@@ -158,22 +155,22 @@ class QuotesNotificationService(
 
         notificationManager.notify(
             2,
-            notification1
+            notification1,
         )
         notificationManager.notify(
             1,
-            notification2
+            notification2,
         )
         notificationManager.notify(
             2,
-            summaryNotification
+            summaryNotification,
         )
     }
 
     private fun Context.bitmapFromResource(
-        @DrawableRes resId: Int
+        @DrawableRes resId: Int,
     ) = BitmapFactory.decodeResource(
         resources,
-        resId
+        resId,
     )
 }

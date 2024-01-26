@@ -1,8 +1,6 @@
 package com.quotesapp.quotesko.presentation
 
 import android.annotation.SuppressLint
-import android.app.Application
-import android.content.Context
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.app.NotificationCompat
@@ -13,7 +11,6 @@ import com.example.experiment.data.RemoteDataRepository
 import com.quotesapp.quotesko.R
 import com.quotesapp.quotesko.utils.ApiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -27,12 +24,11 @@ class MainViewModel @Inject constructor(
     private val notificationManager: NotificationManagerCompat,
 ) : ViewModel() {
 
-
     val response: MutableState<ApiState> = mutableStateOf(ApiState.Idle)
 
-
     fun showNotification(quote: String, author: String) {
-        notificationManager.notify(1,
+        notificationManager.notify(
+            1,
             notificationBuilder
                 .setContentTitle(quote)
                 .setContentText(author)
@@ -42,7 +38,8 @@ class MainViewModel @Inject constructor(
     }
 
     fun showNotificationExpandable(quote: String, author: String) {
-        notificationManager.notify(1,
+        notificationManager.notify(
+            1,
             notificationBuilder
                 .setContentTitle(quote)
                 .setContentText(author)

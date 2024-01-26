@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import com.quotesapp.quotesko.utils.QuoteNotification
 
-class QuotesNotificationReceiver: BroadcastReceiver() {
+class QuotesNotificationReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent?) {
         val service = QuotesNotificationService(context)
