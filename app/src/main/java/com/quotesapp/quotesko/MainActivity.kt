@@ -48,7 +48,6 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             QuotesKoJCTheme {
-                // A surface container using the 'background' color from the theme
                 val apiState = mainViewModel.response.value
                 val service = QuotesNotificationService(this)
                 val scope = rememberCoroutineScope()

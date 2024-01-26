@@ -106,7 +106,6 @@ class QuotesNotificationService(
 
     fun showNotificationGroup(quote: String, author: String) {
         val groupId = "quotes_group"
-        val summaryId = 0
 
         val notification1 = NotificationCompat.Builder(context, QUOTES_CHANNEL_ID)
             .setContentTitle(quote)
