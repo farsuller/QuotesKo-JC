@@ -19,24 +19,20 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object NotificationModule {
-
-
     @Singleton
     @Provides
-    fun provideNotificationBuilder(@ApplicationContext context: Context) : NotificationCompat.Builder{
+    fun provideNotificationBuilder(@ApplicationContext context: Context): NotificationCompat.Builder {
         val activityIntent = Intent(context, MainActivity::class.java)
         val activityPendingIntent = PendingIntent.getActivity(
             context,
             1,
             activityIntent,
-            PendingIntent.FLAG_IMMUTABLE
+            PendingIntent.FLAG_IMMUTABLE,
         )
-
-        return NotificationCompat.Builder(context,QUOTES_CHANNEL_ID)
+        return NotificationCompat.Builder(context, QUOTES_CHANNEL_ID)
             .setContentTitle("Inject Notification")
             .setContentText("Inject Content")
             .setSmallIcon(R.drawable.quotesko_icon)
@@ -51,18 +47,17 @@ object NotificationModule {
 //                    .setContentText("Unlock to see the message")
 //                    .build()
 //            ) This commented are in the scenario of displaying notification on lock screen but the content are private
-
     }
 
     @Singleton
     @Provides
-    fun provideNotificationManager(@ApplicationContext context: Context): NotificationManagerCompat{
+    fun provideNotificationManager(@ApplicationContext context: Context): NotificationManagerCompat {
         val notificationManager = NotificationManagerCompat.from(context)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 QUOTES_CHANNEL_ID,
                 "Quotes",
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_DEFAULT,
             )
 
             notificationManager.createNotificationChannel(channel)

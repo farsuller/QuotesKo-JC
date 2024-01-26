@@ -10,10 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ErrorScreen(error:String){
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
-
-        Text(text = error,
-        modifier = Modifier.padding(horizontal = 16.dp))
+fun ErrorScreen(error: String) {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Text(
+            text = error,
+            modifier = Modifier.padding(horizontal = 16.dp),
+        )
     }
 }

@@ -1,6 +1,5 @@
 package com.quotesapp.quotesko.presentation
 
-
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -22,29 +21,31 @@ import androidx.compose.ui.unit.sp
 import com.quotesapp.quotesko.model.QuotesV2
 
 @Composable
-fun RandomQuoteScreen(quote: QuotesV2, index:Int = 1){
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(horizontal = 16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+fun RandomQuoteScreen(quote: QuotesV2, index: Int = 1) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
         Icon(
-          imageVector = Icons.Rounded.FormatQuote,
+            imageVector = Icons.Rounded.FormatQuote,
             contentDescription = null,
-            modifier = Modifier.size(140.dp)
+            modifier = Modifier.size(140.dp),
         )
 
-        Text(text = quote[index].q,
-        fontSize = 24.sp,
-        fontWeight = FontWeight.Medium
+        Text(
+            text = quote[index].q,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Medium,
         )
 
         Spacer(modifier = Modifier.size(8.dp))
-        Box(modifier = Modifier.fillMaxWidth(.96F),){
-            Text(text = quote[index].a,
-            fontSize = 16.sp,
-            fontFamily = FontFamily.Monospace
+        Box(modifier = Modifier.fillMaxWidth(.96F)) {
+            Text(
+                text = quote[index].a,
+                fontSize = 16.sp,
+                fontFamily = FontFamily.Monospace,
             )
         }
     }

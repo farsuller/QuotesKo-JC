@@ -4,5 +4,5 @@ data class QuotesV2Item(
     val a: String,
     val c: String,
     val h: String,
-    val q: String
+    val q: String,
 )

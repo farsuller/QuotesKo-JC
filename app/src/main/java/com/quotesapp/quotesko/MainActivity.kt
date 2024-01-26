@@ -37,11 +37,11 @@ import com.quotesapp.quotesko.utils.ApiState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.random.Random
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val mainViewModel : MainViewModel by viewModels()
-
+    private val mainViewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
 
                 val scope = rememberCoroutineScope()
 
-                var randomIndex by remember{ mutableIntStateOf(1) }
+                var randomIndex by remember { mutableIntStateOf(1) }
                 var quotes by remember { mutableStateOf("") }
                 var author by remember { mutableStateOf("") }
 
@@ -59,12 +59,15 @@ class MainActivity : ComponentActivity() {
                     mainViewModel.getRandomQuotes()
                 })
 
-                Scaffold(topBar = {
-                    TopAppBar(title = {
-                        Text(text = "Quote",
-                            fontFamily = FontFamily.Serif)
-                    })
-                },
+                Scaffold(
+                    topBar = {
+                        TopAppBar(title = {
+                            Text(
+                                text = "Quote",
+                                fontFamily = FontFamily.Serif,
+                            )
+                        })
+                    },
                     floatingActionButton = {
                         FloatingActionButton(onClick = {
                             scope.launch {
@@ -76,23 +79,28 @@ class MainActivity : ComponentActivity() {
                         }) {
                             Icon(imageVector = Icons.Rounded.Shuffle, contentDescription = null)
                         }
-                    }) {paddingValues ->
+                    },
+                ) { paddingValues ->
 
-                    AnimatedContent(targetState = apiState, label = "animated_content",
+                    AnimatedContent(
+                        targetState = apiState,
+                        label = "animated_content",
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(paddingValues),
                         transitionSpec = {
                             fadeIn(
-                                animationSpec = tween(durationMillis = 300, easing = LinearEasing)
+                                animationSpec = tween(durationMillis = 300, easing = LinearEasing),
                             ) togetherWith fadeOut(
-                                animationSpec = tween(durationMillis = 300, easing = LinearEasing)
+                                animationSpec = tween(durationMillis = 300, easing = LinearEasing),
                             )
-                        }) {result ->
-                        when(result){
+                        },
+                    ) { result ->
+                        when (result) {
                             ApiState.Loading -> {
                                 LoadingScreen()
                             }
+
                             is ApiState.Success -> {
                                 val quote = result.data.body()!!
                                 RandomQuoteScreen(quote = quote, index = randomIndex)
@@ -100,14 +108,14 @@ class MainActivity : ComponentActivity() {
                                 quotes = quote[randomIndex].q
                                 author = quote[randomIndex].a
                             }
+
                             is ApiState.Error -> {
                                 ErrorScreen(error = result.error.message ?: "Something went wrong")
                             }
+
                             else -> Unit
                         }
-
                     }
-
                 }
             }
         }

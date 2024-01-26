@@ -14,20 +14,18 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     @Provides
     @Singleton
-    fun provideQuoteApi():QuoteApi{
+    fun provideQuoteApi(): QuoteApi {
         return Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(QuoteApi::class.java)
     }
 
-
     @Provides
     @Singleton
-    fun provideRemoteDataRepository(quoteApi: QuoteApi) : RemoteDataRepositoryImpl {
+    fun provideRemoteDataRepository(quoteApi: QuoteApi): RemoteDataRepositoryImpl {
         return RemoteDataRepositoryImpl(quoteApi = quoteApi)
     }
 }

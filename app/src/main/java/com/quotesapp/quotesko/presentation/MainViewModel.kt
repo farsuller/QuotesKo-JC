@@ -19,26 +19,29 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val repository: RemoteDataRepository,
     private val notificationBuilder: NotificationCompat.Builder,
-    private val notificationManager: NotificationManagerCompat
-): ViewModel(){
+    private val notificationManager: NotificationManagerCompat,
+) : ViewModel() {
 
-    val response:MutableState<ApiState> = mutableStateOf(ApiState.Idle)
-
+    val response: MutableState<ApiState> = mutableStateOf(ApiState.Idle)
 
     @SuppressLint("MissingPermission")
-    fun showNotification(quote: String, author: String){
-        notificationManager.notify(1,notificationBuilder
-            .setContentTitle(quote)
-            .setContentText(author).build())
+    fun showNotification(quote: String, author: String) {
+        notificationManager.notify(
+            1,
+            notificationBuilder
+                .setContentTitle(quote)
+                .setContentText(author)
+                .build(),
+        )
     }
 
-    fun getRandomQuotes () = viewModelScope.launch {
+    fun getRandomQuotes() = viewModelScope.launch {
         repository.getRandomQuotes()
             .onStart {
                 response.value = ApiState.Loading
             }.catch {
                 response.value = ApiState.Error(it)
-            }.collect{
+            }.collect {
                 response.value = ApiState.Success(it)
             }
     }

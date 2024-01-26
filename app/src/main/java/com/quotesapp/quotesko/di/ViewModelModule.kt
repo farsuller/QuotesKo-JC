@@ -14,11 +14,11 @@ import dagger.hilt.android.components.ViewModelComponent
 object ViewModelModule {
 
     @Provides
-    fun provideMainViewModule(remoteDataRepository: RemoteDataRepositoryImpl,
-                              notificationBuilder: NotificationCompat.Builder,
-                              notificationManager: NotificationManagerCompat) : MainViewModel {
-
+    fun provideMainViewModule(
+        remoteDataRepository: RemoteDataRepositoryImpl,
+        notificationBuilder: NotificationCompat.Builder,
+        notificationManager: NotificationManagerCompat,
+    ): MainViewModel {
         return MainViewModel(remoteDataRepository, notificationBuilder, notificationManager)
     }
-
 }

@@ -9,9 +9,9 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class RemoteDataRepositoryImpl @Inject constructor(
-    private val quoteApi: QuoteApi
+    private val quoteApi: QuoteApi,
 ) : RemoteDataRepository {
-    override fun getRandomQuotes(): Flow<Response<QuotesV2>> = flow{
+    override fun getRandomQuotes(): Flow<Response<QuotesV2>> = flow {
         emit(quoteApi.getRandomQuote())
     }.flowOn(Dispatchers.IO)
 }
