@@ -1,0 +1,35 @@
+name: SolofolioBuild
+on:
+  pull_request :
+    branches : [ master ]
+  push :
+    branches: [ master ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      - name: Set permission Gradle
+        run: chmod +x ./gradlew
+
+      - name: Run Spotless with Gradle
+        run: ./gradlew spotlessApply
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Debug artifact
+          path: app/debug/quotesKo-debug.apk
