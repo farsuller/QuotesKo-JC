@@ -35,7 +35,7 @@ object NotificationModule {
         return NotificationCompat.Builder(context, QUOTES_CHANNEL_ID)
             .setContentTitle("Inject Notification")
             .setContentText("Inject Content")
-            .setSmallIcon(R.drawable.quotesko_icon)
+            .setSmallIcon(R.drawable.quotesko_ic_round_no_bg)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(activityPendingIntent)
             .setVisibility(VISIBILITY_PUBLIC)

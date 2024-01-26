@@ -32,6 +32,7 @@ import com.quotesapp.quotesko.presentation.ErrorScreen
 import com.quotesapp.quotesko.presentation.LoadingScreen
 import com.quotesapp.quotesko.presentation.MainViewModel
 import com.quotesapp.quotesko.presentation.RandomQuoteScreen
+import com.quotesapp.quotesko.service.QuotesNotificationService
 import com.quotesapp.quotesko.ui.theme.QuotesKoJCTheme
 import com.quotesapp.quotesko.utils.ApiState
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,11 +45,12 @@ class MainActivity : ComponentActivity() {
     private val mainViewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             QuotesKoJCTheme {
                 // A surface container using the 'background' color from the theme
                 val apiState = mainViewModel.response.value
-
+                val service = QuotesNotificationService(this)
                 val scope = rememberCoroutineScope()
 
                 var randomIndex by remember { mutableIntStateOf(1) }
@@ -74,8 +76,8 @@ class MainActivity : ComponentActivity() {
                                 randomIndex = Random.nextInt(0, 49)
                             }
 
-                            mainViewModel.showNotification(quote = quotes, author = author)
-                            //  service.showNotification(quote = quotes, author = author)
+                           // mainViewModel.showNotification(quote = quotes, author = author)
+                             service.showExpandableNotification(quote = quotes, author = author)
                         }) {
                             Icon(imageVector = Icons.Rounded.Shuffle, contentDescription = null)
                         }
