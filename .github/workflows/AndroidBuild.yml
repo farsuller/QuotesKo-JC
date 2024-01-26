@@ -1,4 +1,4 @@
-name: SolofolioBuild
+name: QuotesKoBuild
 on:
   pull_request :
     branches : [ master ]
