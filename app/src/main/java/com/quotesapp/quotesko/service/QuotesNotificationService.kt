@@ -43,12 +43,12 @@ class QuotesNotificationService(
             .setContentText(author)
             .setSmallIcon(R.drawable.quotesko_ic_round_no_bg)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setLargeIcon(image)
+            // .setLargeIcon(image)
             .setStyle(
                 NotificationCompat
                     .BigPictureStyle()
-                    .bigPicture(image)
-                    .bigLargeIcon(image),
+                    .bigPicture(image),
+                // .bigLargeIcon(image),
             )
             .setAutoCancel(true)
             .build()

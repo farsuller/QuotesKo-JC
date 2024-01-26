@@ -1,4 +1,4 @@
-package com.example.experiment.data
+package com.quotesapp.quotesko.data
 
 import com.quotesapp.quotesko.model.QuotesV2
 import kotlinx.coroutines.flow.Flow

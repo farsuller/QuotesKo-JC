@@ -7,8 +7,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.experiment.data.RemoteDataRepository
 import com.quotesapp.quotesko.R
+import com.quotesapp.quotesko.data.RemoteDataRepository
+import com.quotesapp.quotesko.data.VerseDataRepository
 import com.quotesapp.quotesko.utils.ApiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
@@ -19,12 +20,14 @@ import javax.inject.Inject
 @HiltViewModel
 @SuppressLint("MissingPermission")
 class MainViewModel @Inject constructor(
-    private val repository: RemoteDataRepository,
+    private val quotesRepository: RemoteDataRepository,
+    private val verseDataRepository: VerseDataRepository,
     private val notificationBuilder: NotificationCompat.Builder,
     private val notificationManager: NotificationManagerCompat,
 ) : ViewModel() {
 
-    val response: MutableState<ApiState> = mutableStateOf(ApiState.Idle)
+    val quotesResponse: MutableState<ApiState> = mutableStateOf(ApiState.Idle)
+    val verseResponse: MutableState<ApiState> = mutableStateOf(ApiState.Idle)
 
     fun showNotification(quote: String, author: String) {
         notificationManager.notify(
@@ -49,13 +52,24 @@ class MainViewModel @Inject constructor(
     }
 
     fun getRandomQuotes() = viewModelScope.launch {
-        repository.getRandomQuotes()
+        quotesRepository.getRandomQuotes()
             .onStart {
-                response.value = ApiState.Loading
+                quotesResponse.value = ApiState.Loading
             }.catch {
-                response.value = ApiState.Error(it)
+                quotesResponse.value = ApiState.Error(it)
             }.collect {
-                response.value = ApiState.Success(it)
+                quotesResponse.value = ApiState.Success(it)
+            }
+    }
+
+    fun getVerse() = viewModelScope.launch {
+        verseDataRepository.getVerse()
+            .onStart {
+                verseResponse.value = ApiState.Loading
+            }.catch {
+                verseResponse.value = ApiState.Error(it)
+            }.collect {
+                verseResponse.value = ApiState.Success(it)
             }
     }
 }

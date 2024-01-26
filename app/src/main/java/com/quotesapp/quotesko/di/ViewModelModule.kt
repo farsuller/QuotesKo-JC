@@ -2,7 +2,8 @@ package com.quotesapp.quotesko.di
 
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.example.experiment.data.RemoteDataRepositoryImpl
+import com.quotesapp.quotesko.data.RemoteDataRepositoryImpl
+import com.quotesapp.quotesko.data.VerseDataRepositoryImpl
 import com.quotesapp.quotesko.presentation.MainViewModel
 import dagger.Module
 import dagger.Provides
@@ -16,9 +17,10 @@ object ViewModelModule {
     @Provides
     fun provideMainViewModule(
         remoteDataRepository: RemoteDataRepositoryImpl,
+        verseDataRepositoryImpl: VerseDataRepositoryImpl,
         notificationBuilder: NotificationCompat.Builder,
         notificationManager: NotificationManagerCompat,
     ): MainViewModel {
-        return MainViewModel(remoteDataRepository, notificationBuilder, notificationManager)
+        return MainViewModel(remoteDataRepository, verseDataRepositoryImpl, notificationBuilder, notificationManager)
     }
 }

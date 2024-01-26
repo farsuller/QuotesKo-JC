@@ -3,7 +3,6 @@ package com.quotesapp.quotesko.presentation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -24,7 +23,7 @@ import com.quotesapp.quotesko.model.QuotesV2
 fun RandomQuoteScreen(quote: QuotesV2, index: Int = 1) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -41,7 +40,7 @@ fun RandomQuoteScreen(quote: QuotesV2, index: Int = 1) {
         )
 
         Spacer(modifier = Modifier.size(8.dp))
-        Box(modifier = Modifier.fillMaxWidth(.96F)) {
+        Box(modifier = Modifier.fillMaxWidth()) {
             Text(
                 text = quote[index].a,
                 fontSize = 16.sp,
