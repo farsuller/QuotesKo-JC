@@ -1,10 +1,10 @@
 import java.io.FileNotFoundException
 import java.util.Properties
-import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt)
     kotlin("kapt")
 }
@@ -28,13 +28,13 @@ android {
 
     defaultConfig {
         applicationId = "com.quotesapp.quotesko"
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 3
+        versionName = "1.2"
 
     }
 
     applicationVariants.all {
-        archivesName.set("quotesKo-${buildType.name}-$versionCode-$versionName")
+        base.archivesName.set("quotesKo-${buildType.name}-$versionCode-$versionName")
     }
 
 
@@ -59,6 +59,7 @@ android {
             signingConfig = signingConfigs.getByName("release")
             isDebuggable = false
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }

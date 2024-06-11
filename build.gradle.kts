@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.ktlint) apply false
     alias(libs.plugins.spotless) apply false
     alias(libs.plugins.kotlin.jvm) apply false
@@ -41,9 +42,6 @@ fun BaseExtension.defaultConfig() {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
-    }
     packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
