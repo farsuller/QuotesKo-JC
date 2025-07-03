@@ -28,8 +28,8 @@ android {
 
     defaultConfig {
         applicationId = "com.quotesapp.quotesko"
-        versionCode = 3
-        versionName = "1.2"
+        versionCode = 4
+        versionName = "1.2.1"
 
     }
 

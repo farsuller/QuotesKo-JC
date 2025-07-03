@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
                                 randomIndex = Random.nextInt(0, 49)
                             }
 
-                            // mainViewModel.showNotification(quote = quotes, author = author)
+                             mainViewModel.showNotification(quote = quotes, author = author)
                             service.showExpandableNotification(quote = quotes, author = author)
                         }) {
                             Icon(imageVector = Icons.Rounded.Shuffle, contentDescription = null)

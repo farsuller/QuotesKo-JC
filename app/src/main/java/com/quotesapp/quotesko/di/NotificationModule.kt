@@ -53,15 +53,13 @@ object NotificationModule {
     @Provides
     fun provideNotificationManager(@ApplicationContext context: Context): NotificationManagerCompat {
         val notificationManager = NotificationManagerCompat.from(context)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                QUOTES_CHANNEL_ID,
-                "Quotes",
-                NotificationManager.IMPORTANCE_DEFAULT,
-            )
+        val channel = NotificationChannel(
+            QUOTES_CHANNEL_ID,
+            "Quotes",
+            NotificationManager.IMPORTANCE_DEFAULT,
+        )
 
-            notificationManager.createNotificationChannel(channel)
-        }
+        notificationManager.createNotificationChannel(channel)
         return notificationManager
     }
 }
